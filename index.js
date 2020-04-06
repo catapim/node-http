@@ -2,6 +2,10 @@ const express = require("express");
 const http = require("http");
 
 const bodyParser = require("body-parser");
+
+const dishRouter = require('./routes/dishRouter');
+
+
 const morgan = require("morgan");
 
 const hostname = "localhost";
@@ -13,55 +17,28 @@ app.use(bodyParser.json());
 // looks for local files in that directory
 app.use(express.static(__dirname + "/public"));
 
-// rest api endpoint
-app.all("/dishes", (req, res, next) => {
-  res.statusCode = 200;
-  res.setHeader("Content-type", "text/plain");
-  next();
-});
+app.use('/dishes', dishRouter)
 
-app.get("/dishes", (req, res, next) => {
-  res.end("will send all the dishes to you!!");
-});
-
-app.post("/dishes", (req, res, next) => {
-  res.end(
-    "will add the dish: " +
-      req.body.name +
-      " with details: " +
-      req.body.description
-  );
-});
-
-app.put("/dishes", (req, res, next) => {
-  res.statusCode = 403;
-  res.end("PUT operation not supported on /dishes");
-});
-
-// danger zone
-app.delete("/dishes", (req, res, next) => {
-  res.end("Deleting all the dishes in /dishes!!");
-});
 
 // dishId
-app.get("/dishes/:dishId", (req, res, next) => {
-  res.end("will send details of the specified dish: " + req.params.dishId) +
-    " to you. ";
-});
+// app.get("/dishes/:dishId", (req, res, next) => {
+//   res.end("will send details of the specified dish: " + req.params.dishId) +
+//     " to you. ";
+// });
 
-app.post("/dishes/:dishId", (req, res, next) => {
-  res.end("POST operation is not supported on /dishes/" + req.params.dishId);
-});
+// app.post("/dishes/:dishId", (req, res, next) => {
+//   res.end("POST operation is not supported on /dishes/" + req.params.dishId);
+// });
 
-app.put("/dishes/:dishId", (req, res, next) => {
-  res.write("Updating the dish: " + req.params.dishId + "\n");
-  res.end(
-    "will update the specified dish: " +
-      req.body.name +
-      "with these details: " +
-      req.body.description
-  );
-});
+// app.put("/dishes/:dishId", (req, res, next) => {
+//   res.write("Updating the dish: " + req.params.dishId + "\n");
+//   res.end(
+//     "will update the specified dish: " +
+//       req.body.name +
+//       "with these details: " +
+//       req.body.description
+//   );
+// });
 
 // danger zone
 app.delete("/dishes/:dishId", (req, res, next) => {
