@@ -26,8 +26,10 @@ app.get("/dishes", (req, res, next) => {
 
 app.post("/dishes", (req, res, next) => {
   res.end(
-    "will add the dish: " + req.body.name +
-      " with details: " + req.body.description
+    "will add the dish: " +
+      req.body.name +
+      " with details: " +
+      req.body.description
   );
 });
 
@@ -43,7 +45,8 @@ app.delete("/dishes", (req, res, next) => {
 
 // dishId
 app.get("/dishes/:dishId", (req, res, next) => {
-  res.end("will send details of the specified dish: " + req.params.dishId) + ' to you. ';
+  res.end("will send details of the specified dish: " + req.params.dishId) +
+    " to you. ";
 });
 
 app.post("/dishes/:dishId", (req, res, next) => {
@@ -51,9 +54,13 @@ app.post("/dishes/:dishId", (req, res, next) => {
 });
 
 app.put("/dishes/:dishId", (req, res, next) => {
-  res.write('Updating the dish: ' + req.params.dishId + '\n');
-  res.end('will update the specified dish: ' + req.body.name +
-  'with these details: ' + req.body.description);
+  res.write("Updating the dish: " + req.params.dishId + "\n");
+  res.end(
+    "will update the specified dish: " +
+      req.body.name +
+      "with these details: " +
+      req.body.description
+  );
 });
 
 // danger zone
