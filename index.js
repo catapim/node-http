@@ -19,9 +19,8 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname+'/public'));
 
 app.use('/dishes', dishRouter)
-
 app.use('/leaders', leaderRouter)
-app.use('/promo', promoRouter)
+app.use('/promotions', promoRouter)
 
 // app.use((req, res, next) => {
 //   // console.log(req.headers);

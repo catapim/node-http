@@ -1,10 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const leaderRoute = express.Router();
+const leaderRouter = express.Router();
 
-leaderRoute.use(bodyParser.json());
-leaderRoute.route('/')
+leaderRouter.use(bodyParser.json());
+
+// LEADERS
+leaderRouter.route('/')
     .all((req, res, next) => {
         res.statusCode = 200;
         res.setHeader("Content-type", "text/plain");
@@ -12,6 +14,14 @@ leaderRoute.route('/')
     })
     .get((req, res, next) => {
         res.end("will send all the Leaders to you!!");
+    })
+    .put((req, res, next) => {
+        res.end(
+            "will update the leader: " +
+                req.body.name +
+                " with details: " +
+                req.body.description
+            );
     })
     .post((req, res, next) => {
         res.end(
@@ -21,38 +31,52 @@ leaderRoute.route('/')
             req.body.description
         );
     })
-    .put((req, res, next) => {
-        res.statusCode = 403;
-        res.end("PUT operation not supported on /Leaders");
-    })
     // danger zone
     .delete((req, res, next) => {
-        res.end("Deleting all the Leaders in /Leaders!!");
+        res.end("Deleting all the Leaders in /leaders!!");
     });
 
-// leader ID
-leaderRoute.route('/:leaderId')
-    .all((req, res, next) => {
-        res.statusCode = 200;
-        res.setHeader("Content-type", "text/plain");
-        next();
-    })
+// LEADER ID
+leaderRouter.route("/:leaderId")
+  .all((req, res, next) => {
+    res.statusCode = 200;
+    res.setHeader("Content-type", "text/plain");
+    next();
+  })
 
-    .get((req, res, next) =>{
-        res.end("will send details of the specified leader: " + req.params.leaderId + " to you. ");
-    })
+  .get((req, res, next) => {
+    res.end(
+      "I will send details of the specified leader: " +
+        req.params.leaderId +
+        " to you. "
+    );
+  })
 
-    .post((req, res, next) => {
-        res.end("POST operation is not supported on /Leaders/" + req.params.leaderId);
-    })
+  .put((req, res, next) => {
+    res.write("Updating the leader: " + req.params.leaderId + "\n");
+    res.end(
+      "I will update the specified leader: " +
+        req.body.name +
+        ", with these details: " +
+        req.body.description +
+        ", with id: " +
+        req.body.leaderId
+    );
+  })
 
-    .put((req, res, next) => {
-        res.write("Updating the leader: " + req.params.leaderId + "\n");
-        res.end("will update the specified leader: " + req.body.name + "with these details: " + req.body.description);
-    })
+  .post((req, res, next) => {
+    res.end(
+      "Will add the leader: " +
+        req.body.name +
+        ", with details: " +
+        req.body.description +
+        ", with id: " +
+        req.body.leaderId
+    );
+  })
 
-    .delete(function (req, res, next) {
-        res.end('Deleting leader: ' + req.params.leaderId);
-    })
+  .delete(function (req, res, next) {
+    res.end("Deleting leader: " + req.params.leaderId);
+  });
 
-module.exports = leaderRoute;
+module.exports = leaderRouter;
