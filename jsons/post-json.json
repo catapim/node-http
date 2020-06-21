@@ -1,0 +1,30 @@
+{
+	"name": "empanada de queso",
+	"image":"images/empanada.png",
+	"category":"mains",
+	"label":"hot",
+	"price":"1000.1",
+	"featured":"true",
+	"description":"comida chilena con queso frita",
+	"comments": [
+			{
+				"rating":5,
+				"comment":"estar buena...",
+				"author":"phasar",
+				"date": "2018-10-16T17:57:28.556094Z"
+			},
+			{
+				"rating":2,
+				"comment":"estar mas o menos...",
+				"author":"camila",
+				"date": "2018-09-16T17:57:28.556094Z"
+			},
+			{
+				"rating":1,
+				"comment":"pense que era distinta...",
+				"author":"pia",
+				"date": "2018-11-16T17:57:28.556094Z"
+			}
+			
+		]
+}
